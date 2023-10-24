@@ -1,0 +1,46 @@
+---
+const { title, robots = 'noindex, nofollow', desc = '' } = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.url)
+const socialImageURL = new URL('/images/preview.jpg', Astro.url)
+const sitemapURL = new URL('/sitemap-0.xml', Astro.url)
+const rssURL = new URL('/feed.xml', Astro.url)
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<!-- SEO -->
+<title>{title}</title>
+<meta name="description" content={desc} />
+<meta name="robots" content={robots} />
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" title={title} href={sitemapURL} />
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title={title} href={rssURL} />
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@publisher_handle" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={desc} />
+<meta name="twitter:creator" content="@author_handle" />
+<meta name="twitter:image" content={socialImageURL} />
+<!-- Open Graph data -->
+<meta property="og:title" content={title} />
+<meta property="og:type" content="article" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:description" content={desc} />
+<meta property="og:site_name" content={title} />
+<meta property="fb:admins" content="Facebook numeric ID" />
+
+<!-- 
+{canonicalURL}
+<hr />
+{sitemapURL}
+<hr />
+{socialImageURL}
+<hr />
+{canonicalURL} -->
